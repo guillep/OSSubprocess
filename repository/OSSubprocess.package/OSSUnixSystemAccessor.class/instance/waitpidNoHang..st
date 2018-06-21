@@ -5,10 +5,10 @@ waitpidNoHang: childPidInteger
 	Answers nil if child has not yet exited or the exit status if it has. 
 	"
 	
-	| returnValue statusPointer answer |
+	| statusPointer |
 	childPidInteger ifNil: [ self error: 'Cannot waitpid if pid is invalid' ].
 	statusPointer := ExternalAddress allocate: self sizeOfInt.
-	[
+	[ | returnValue |
 		returnValue := self primitiveWaitpid: childPidInteger statusPointer: statusPointer options: WNOHANG.
 
 		(returnValue = -1) ifTrue: [ self strerror: returnValue message: 'waitpid()'. ]. 
@@ -17,8 +17,8 @@ waitpidNoHang: childPidInteger
 		(returnValue = childPidInteger) ifTrue: [ 
 			"If wait() or waitpid() returns because the status of a child process is available, these functions shall return a value equal to the process ID of the child process for which status is reported.
 			This means...status is available. It has finished. "
-			answer := statusPointer platformLongAt: 1.
-			^ answer.
-		]
+			^ statusPointer platformLongAt: 1.
+		].
+		^ nil
 	] ensure: [ statusPointer free ]
 	
