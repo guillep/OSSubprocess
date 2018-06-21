@@ -7,8 +7,7 @@ queryExitStatus
 	when a SIGCHLD was received (#updateActiveChildrenAndNotifyDead) or from a image-side polling
 	 like #waitForExitPollingEvery:doing:"
 	
-	waitPidCriticalSemaphore critical: [
-	^ exitStatus ifNil: [ 
+	^ exitStatus ifNil: [ waitPidCriticalSemaphore critical: [
 		exitStatus := self systemAccessor waitpidNoHang: pid.
 		exitStatus
 	] ].
