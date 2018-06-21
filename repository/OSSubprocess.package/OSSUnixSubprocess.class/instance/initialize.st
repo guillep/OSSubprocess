@@ -9,6 +9,7 @@ initialize
 	retrievedStdout := String new writeStream. 
 	retrievedStderr := String new writeStream. 
 	terminateOnShutdown := false.
+	waitPidCriticalSemaphore := Semaphore forMutualExclusion
 	
 	
 		
