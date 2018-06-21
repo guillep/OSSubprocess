@@ -1,0 +1,4 @@
+*OSSubprocess
+errno
+	
+	self subclassResponsibility

@@ -11,7 +11,7 @@ waitpidNoHang: childPidInteger
 	[
 		returnValue := self primitiveWaitpid: childPidInteger statusPointer: statusPointer options: WNOHANG.
 
-		(returnValue = -1) ifTrue: [ 
+		(returnValue = -1 and: [ OSPlatform current errno ~= ECHILD ]) ifTrue: [ 
 			self perror: 'waitpid()' ].
 		returnValue = 0 ifTrue: [ ^ nil ]. "If waitpid() was invoked with WNOHANG set in options, it has at least one child process specified by pid for which status is not available, and status is not available for any process specified by pid, 0 is returned.
 		That means...status is not available for childPidInteger..probably hasn't finished yet."

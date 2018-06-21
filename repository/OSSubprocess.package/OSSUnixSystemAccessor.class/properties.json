@@ -4,6 +4,7 @@
 	"category" : "OSSubprocess",
 	"classinstvars" : [ ],
 	"pools" : [
+		"LibCErrnoSharedPool",
 		"LibCWaitSharedPool"
 	],
 	"classvars" : [
