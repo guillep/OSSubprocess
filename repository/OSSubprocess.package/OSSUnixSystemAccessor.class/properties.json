@@ -10,7 +10,9 @@
 	"classvars" : [
 		"VMProcessSystemAcessor"
 	],
-	"instvars" : [ ],
+	"instvars" : [
+		"finishedChildProcesses"
+	],
 	"name" : "OSSUnixSystemAccessor",
 	"type" : "normal"
 }
