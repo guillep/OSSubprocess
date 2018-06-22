@@ -19,6 +19,6 @@ waitpidNoHang: childPidInteger
 			This means...status is available. It has finished. "
 			^ statusPointer platformLongAt: 1.
 		].
-		^ nil
+		self error: 'Unexpected return value: ', returnValue asString
 	] ensure: [ statusPointer free ]
 	
